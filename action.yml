@@ -16,7 +16,7 @@ runs:
 
     - name: Validate branch exists
       shell: bash
-      if: inputs.validate_branch
+      if: ${{ inputs.validate_branch == 'true' }}
       env:
         GITHUB_REPOSITORY: ${{ github.repository }}
         BRANCH: ${{ inputs.branch }}
