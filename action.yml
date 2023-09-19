@@ -65,7 +65,10 @@ runs:
         done
         if [[ $FOUND == 0 ]]; then
           echo "Could not workflow file for branch $BRANCH - tried $FILENAMES"
-          exit 1
+          # If there's no CI file, then this workflow has worked as expected. Don't mark it as a failure.
+          # This allows us to do auto-merge ups for things like developer-docs which don't have CI
+          # without adding a dummy CI which could result in a false sense of security when reviewing PRs etc.
+          exit 0
         fi
 
     - name: Send API request
