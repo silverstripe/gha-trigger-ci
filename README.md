@@ -16,11 +16,19 @@ is used on a schedule event to trigger a CI workflow on two different major vers
 
 **workflow.yml**
 ```yml
-steps:
-  - name: Trigger CI
-    uses: silverstripe/gha-trigger-ci@v1
-    with:
-      branch: 4.13
+permissions: {}
+
+jobs:
+  triggerci:
+    # ...
+    permissions:
+      contents: read
+      actions: write
+    steps:
+      - name: Trigger CI
+        uses: silverstripe/gha-trigger-ci@v1
+        with:
+          branch: 4.13
 ```
 
 ### Inputs:
